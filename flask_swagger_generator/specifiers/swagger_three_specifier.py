@@ -361,7 +361,9 @@ class SwaggerPathParameter(SwaggerModel):
                 name=self.name,
                 required=self.required,
                 description=self.description,
-                input_type=self.input_type.value
+                input_type= InputType.STRING.value
+                            if self.input_type == InputType.PATH 
+                            else self.input_type.value
             )
         )
 
@@ -446,7 +448,6 @@ class SwaggerPath(SwaggerModel):
             )
 
             for path_parameter in path_parameters:
-
                 self.path = self.path.replace(
                     "<{}:{}>".format(
                         path_parameter.input_type.get_flask_input_type_value(),
